@@ -3,6 +3,7 @@ import {KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOp
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {theme} from "../colors";
 import {useState} from "react";
+
 export default function Login() {
   const [email, setEmail] = useState('');
   // State variable to hold the password
