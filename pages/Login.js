@@ -2,7 +2,7 @@ import {StatusBar} from 'expo-status-bar';
 import {KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {theme} from "../colors";
-import {useState} from "react";
+import React, {useState} from "react";
 
 export default function Login() {
   const [email, setEmail] = useState('');
