@@ -1,6 +1,6 @@
 import React from "react";
 import {FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, View} from "react-native";
-import {theme} from "../colors";
+import {theme} from "../colors.js";
 import DefaultImage from '../assets/default_profile.png';
 
 const DEFAULT_PROFILE_IMAGE = Image.resolveAssetSource(DefaultImage).uri;

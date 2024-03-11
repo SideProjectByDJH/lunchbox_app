@@ -1,6 +1,6 @@
 import React from "react";
-import {BottomNavigation, Text, useTheme} from 'react-native-paper';
-import {theme} from "../colors";
+import { BottomNavigation, Text, useTheme } from 'react-native-paper';
+import { theme } from "../colors";
 import Followings from "../pages/Followings";
 
 const HomeRoute = () => <Text>Home</Text>;
