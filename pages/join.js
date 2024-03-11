@@ -1,10 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
 import {KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {theme} from "./colors";
-import {useState} from "react";
+import {theme} from "../colors";
+import React, {useState} from "react";
 
-export default function App() {
+export default function Join() {
   const [email, setEmail] = useState('');
   const [authNumber, setAuthNumber] = useState('');
   const [nickname, setNickname] = useState('');
@@ -54,11 +54,11 @@ export default function App() {
           /> */}
 
           <TouchableOpacity
-              style={{ 
-                marginTop: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+            style={{
+              marginTop: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
           >
             <MaterialCommunityIcons
               name={'account-circle'}
@@ -66,25 +66,24 @@ export default function App() {
               color="#aaa"
               style={styles.icon}
               onPress={() => {
-            alert(`이미지 피커`)
-          }}/>
-          
-          </TouchableOpacity>
-      </View>
+                alert(`이미지 피커`)
+              }}/>
 
+          </TouchableOpacity>
+        </View>
 
 
         <Text style={styles.guidanceText}>이메일</Text>
         <View style={styles.inputButtonContainer}>
           <View style={styles.inputContainer}>
-          <TextInput
-            placeholder={'jane@example.com'}
-            style={styles.textInput}
-            keyboardType={'email-address'}
-            //onChangeText={} : 인증 여부 초기화 필요
-          />
-        </View>
-        <TouchableOpacity style={styles.submitButton} onPress={() => {
+            <TextInput
+              placeholder={'jane@example.com'}
+              style={styles.textInput}
+              keyboardType={'email-address'}
+              //onChangeText={} : 인증 여부 초기화 필요
+            />
+          </View>
+          <TouchableOpacity style={styles.submitButton} onPress={() => {
             alert(`인증번호 전송`)
           }}>
             <Text style={styles.btnText}>인증번호</Text>
@@ -94,20 +93,20 @@ export default function App() {
 
         <View style={styles.inputButtonContainer}>
           <View style={styles.inputContainer}>
-          <TextInput
-            placeholder={'인증번호'}
-            style={styles.textInput}
-            keyboardType={'number-pad'}
-          />
-        </View>
-        <TouchableOpacity style={styles.submitButton} onPress={() => {
+            <TextInput
+              placeholder={'인증번호'}
+              style={styles.textInput}
+              keyboardType={'number-pad'}
+            />
+          </View>
+          <TouchableOpacity style={styles.submitButton} onPress={() => {
             alert(`인증번호 확인`)
           }}>
             <Text style={styles.btnText}>인증번호</Text>
             <Text style={styles.btnText}>확인</Text>
           </TouchableOpacity>
         </View>
-       
+
         <Text style={styles.guidanceText}>비밀번호</Text>
         <View style={styles.passwordInputContainer}>
           <TextInput
@@ -145,19 +144,19 @@ export default function App() {
         </View>
 
         <Text style={styles.guidanceText}>닉네임</Text>
-         <View style={styles.inputButtonContainer}>
+        <View style={styles.inputButtonContainer}>
           <View style={styles.inputContainer}>
-          <TextInput
-            placeholder={'방구석 백종원'}
-            style={styles.textInput}
-            keyboardType={'default'}
-          />
-        </View>
-       
+            <TextInput
+              placeholder={'방구석 백종원'}
+              style={styles.textInput}
+              keyboardType={'default'}
+            />
+          </View>
+
         </View>
 
       </View>
-    
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.submitJoinButton} onPress={() => {
           alert(`회원가입.`)
