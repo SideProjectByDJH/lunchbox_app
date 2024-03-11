@@ -74,7 +74,7 @@ export default function ProfileUpdate() {
             <View style={styles.mainContainer}>
                 <Text style={styles.sectionText}>개인 정보 변경</Text>
 
-                <View>
+                <View style={styles.profilePictureContainer}>
                     <Pressable onPress={uploadImage}>
                         <Image
                             source={profilePicture}
@@ -183,9 +183,11 @@ const styles = StyleSheet.create({
       padding: 10,
       flex: 1,
     },
-    profilePicture: {
+    profilePictureContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    profilePicture: {
         borderRadius: 50,
         width: 100,
         height: 100,
