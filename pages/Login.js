@@ -4,7 +4,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {theme} from "../colors";
 import {useState} from "react";
 
-export default function Login() {
+export default function Login({navigation}) {
   const [email, setEmail] = useState('');
   // State variable to hold the password
   const [password, setPassword] = useState('');
@@ -29,7 +29,7 @@ export default function Login() {
         >
           <TouchableOpacity
             onPress={() => {
-              alert("뒤로가기 구현 필요.")
+              navigation.goBack()
             }}
           >
             <MaterialCommunityIcons name="arrow-left-top" size={20} color="black"/>
@@ -81,7 +81,8 @@ export default function Login() {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.submitButton} onPress={() => {
-          alert(`email: ${email}, password: ${password} 로그인 시도.`)
+          //alert(`email: ${email}, password: ${password} 로그인 시도.`)
+          navigation.navigate('Main')
         }}>
           <Text style={styles.btnText}>로그인</Text>
         </TouchableOpacity>
