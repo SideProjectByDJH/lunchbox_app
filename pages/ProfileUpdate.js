@@ -14,6 +14,7 @@ import { theme } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
+import SubmitButton from "../components/common/SubmitButton";
 
 const PASSWORD_INDEX = [
   "current password",
@@ -158,16 +159,12 @@ export default function ProfileUpdate() {
         </View>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => {
-            alert(`nickname: ${nickname}, password: ${newPassword} 변경 시도.`);
-          }}
-        >
-          <Text style={styles.btnText}>변경</Text>
-        </TouchableOpacity>
-      </View>
+      <SubmitButton
+        buttonText="변경"
+        onPress={() => {
+          alert(`nickname: ${nickname}, password: ${newPassword} 변경 시도.`);
+        }}
+      />
     </KeyboardAvoidingView>
   );
 }
@@ -215,19 +212,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: "#aaa",
     fontSize: 24,
-  },
-  buttonContainer: {
-    marginVertical: 35,
-  },
-  submitButton: {
-    backgroundColor: theme.main,
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: theme.white,
   },
 });
