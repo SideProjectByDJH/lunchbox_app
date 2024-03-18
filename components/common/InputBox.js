@@ -1,8 +1,22 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { theme } from "../../colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export const InputBox = ({ title, placeholder, value, onChangeText }) => {
+export const InputBox = ({
+  title,
+  placeholder,
+  value,
+  onChangeText,
+  secureTextEntry,
+  isPassword,
+  isPasswordVisible,
+  setPasswordVisible,
+}) => {
+  const toggleShowPassword = () => {
+    setPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <View>
       <Text>{title}</Text>
@@ -12,7 +26,15 @@ export const InputBox = ({ title, placeholder, value, onChangeText }) => {
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}
+          secureTextEntry={secureTextEntry}
         />
+        {isPassword ? (
+          <MaterialCommunityIcons
+            name={isPasswordVisible ? "eye-off" : "eye"}
+            style={styles.showPasswordIcon}
+            onPress={toggleShowPassword}
+          />
+        ) : null}
       </View>
     </View>
   );
@@ -31,6 +53,11 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 10,
     flex: 1,
+  },
+  showPasswordIcon: {
+    paddingHorizontal: 10,
+    color: "#aaa",
+    fontSize: 24,
   },
 });
 

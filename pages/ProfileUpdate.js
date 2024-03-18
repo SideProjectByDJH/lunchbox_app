@@ -8,7 +8,6 @@ import {
   Pressable,
   Image,
   TouchableOpacity,
-  TextInput,
 } from "react-native";
 import { theme } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -16,12 +15,6 @@ import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import SubmitButton from "../components/common/SubmitButton";
 import InputBox from "../components/common/InputBox";
-
-const PASSWORD_INDEX = [
-  "current password",
-  "new password",
-  "new password check",
-];
 
 export default function ProfileUpdate() {
   const [imageUrl, setImageUrl] = useState(null);
@@ -35,16 +28,6 @@ export default function ProfileUpdate() {
   const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState("");
   const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] = useState(false);
-
-  const toggleShowPassword = (index) => {
-    if (index === PASSWORD_INDEX[0]) {
-      setCurrentPasswordVisible(!isCurrentPasswordVisible);
-    } else if (index === PASSWORD_INDEX[1]) {
-      setNewPasswordVisible(!isNewPasswordVisible);
-    } else if (index === PASSWORD_INDEX[2]) {
-      setCheckNewPasswordVisible(!isCheckNewPasswordVisible);
-    }
-  };
 
   const uploadImage = async () => {
     if (!libraryPermission?.granted) {
@@ -103,55 +86,38 @@ export default function ProfileUpdate() {
           placeholder="기존 닉네임"
           value={nickname}
           onChangeText={setNickname}
+          isPassword={false}
         />
-
-        <Text>현재 비밀번호</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="현재 비밀번호를 입력하세요."
-            value={currentPassword}
-            onChangeText={setCurrentPassword}
-            secureTextEntry={!isCurrentPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isCurrentPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[0])}
-          />
-        </View>
-
-        <Text>새 비밀번호</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="변경할 비밀번호를 입력하세요."
-            value={newPassword}
-            onChangeText={setNewPassword}
-            secureTextEntry={!isNewPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isNewPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[1])}
-          />
-        </View>
-
-        <Text>새 비밀번호 확인</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="변경할 비밀번호를 다시 입력하세요."
-            value={checkNewPassword}
-            onChangeText={setCheckNewPassword}
-            secureTextEntry={!isCheckNewPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isCheckNewPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[2])}
-          />
-        </View>
+        <InputBox
+          title="현재 비밀번호"
+          placeholder="현재 비밀번호를 입력하세요."
+          value={currentPassword}
+          onChangeText={setCurrentPassword}
+          secureTextEntry={!isCurrentPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isCurrentPasswordVisible}
+          setPasswordVisible={setCurrentPasswordVisible}
+        />
+        <InputBox
+          title="새 비밀번호"
+          placeholder="변경할 비밀번호를 입력하세요."
+          value={newPassword}
+          onChangeText={setNewPassword}
+          secureTextEntry={!isNewPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isNewPasswordVisible}
+          setPasswordVisible={setNewPasswordVisible}
+        />
+        <InputBox
+          title="새 비밀번호 확인"
+          placeholder="변경할 비밀번호를 다시 입력하세요."
+          value={checkNewPassword}
+          onChangeText={setCheckNewPassword}
+          secureTextEntry={!isCheckNewPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isCheckNewPasswordVisible}
+          setPasswordVisible={setCheckNewPasswordVisible}
+        />
       </View>
 
       <SubmitButton
@@ -181,19 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 44,
     marginVertical: 20,
   },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderColor: theme.main,
-    borderWidth: 2,
-    marginVertical: 10,
-    padding: 5,
-  },
-  textInput: {
-    padding: 10,
-    flex: 1,
-  },
   profilePictureContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -202,10 +155,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 100,
     height: 100,
-  },
-  showPasswordIcon: {
-    paddingHorizontal: 10,
-    color: "#aaa",
-    fontSize: 24,
   },
 });
