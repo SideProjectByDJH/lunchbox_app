@@ -4,17 +4,16 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
-  Text,
   Pressable,
   Image,
   TouchableOpacity,
 } from "react-native";
-import { theme } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import SubmitButton from "../components/common/SubmitButton";
 import InputBox from "../components/common/InputBox";
+import Title from "../components/common/Title";
 
 export default function ProfileUpdate() {
   const [imageUrl, setImageUrl] = useState(null);
@@ -73,7 +72,7 @@ export default function ProfileUpdate() {
       </View>
 
       <View style={styles.mainContainer}>
-        <Text style={styles.sectionText}>개인 정보 변경</Text>
+        <Title title="개인 정보 변경" />
 
         <View style={styles.profilePictureContainer}>
           <Pressable onPress={uploadImage}>
@@ -141,11 +140,6 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-  },
-  sectionText: {
-    color: theme.main,
-    fontSize: 44,
-    marginVertical: 20,
   },
   profilePictureContainer: {
     alignItems: "center",
