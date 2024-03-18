@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import SubmitButton from "../components/common/SubmitButton";
+import InputBox from "../components/common/InputBox";
 
 const PASSWORD_INDEX = [
   "current password",
@@ -24,10 +25,8 @@ const PASSWORD_INDEX = [
 
 export default function ProfileUpdate() {
   const [imageUrl, setImageUrl] = useState(null);
-  const [libraryPermission, requestLibraryPermission] =
-    ImagePicker.useMediaLibraryPermissions();
-  const profilePicture =
-    imageUrl === null ? require("../assets/favicon.png") : { uri: imageUrl };
+  const [libraryPermission, requestLibraryPermission] = ImagePicker.useMediaLibraryPermissions();
+  const profilePicture = imageUrl === null ? require("../assets/favicon.png") : { uri: imageUrl };
 
   const [nickname, setNickname] = useState("기존 닉네임");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -35,8 +34,7 @@ export default function ProfileUpdate() {
   const [newPassword, setNewPassword] = useState("");
   const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState("");
-  const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] =
-    useState(false);
+  const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] = useState(false);
 
   const toggleShowPassword = (index) => {
     if (index === PASSWORD_INDEX[0]) {
@@ -100,15 +98,12 @@ export default function ProfileUpdate() {
           </Pressable>
         </View>
 
-        <Text>닉네임</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="기존 닉네임"
-            value={nickname}
-            onChangeText={setNickname}
-          />
-        </View>
+        <InputBox
+          title="닉네임"
+          placeholder="기존 닉네임"
+          value={nickname}
+          onChangeText={setNickname}
+        />
 
         <Text>현재 비밀번호</Text>
         <View style={styles.inputContainer}>
