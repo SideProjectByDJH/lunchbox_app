@@ -4,20 +4,17 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import SubmitButton from "../components/common/SubmitButton";
 import InputBox from "../components/common/InputBox";
 import Title from "../components/common/Title";
+import ProfileImage from "../components/common/ProfileImage";
 
 export default function ProfileUpdate() {
   const [imageUrl, setImageUrl] = useState(null);
-  const [libraryPermission, requestLibraryPermission] = ImagePicker.useMediaLibraryPermissions();
   const profilePicture = imageUrl === null ? require("../assets/favicon.png") : { uri: imageUrl };
 
   const [nickname, setNickname] = useState("기존 닉네임");
@@ -27,27 +24,6 @@ export default function ProfileUpdate() {
   const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState("");
   const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] = useState(false);
-
-  const uploadImage = async () => {
-    if (!libraryPermission?.granted) {
-      const permission = await requestLibraryPermission();
-      if (!permission.granted) {
-        return null;
-      }
-    }
-
-    // upload image
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-      aspect: [1, 1],
-    });
-
-    if (!result.canceled) {
-      setImageUrl(result.assets[0].uri);
-    }
-  };
 
   return (
     <KeyboardAvoidingView
@@ -74,11 +50,10 @@ export default function ProfileUpdate() {
       <View style={styles.mainContainer}>
         <Title title="개인 정보 변경" />
 
-        <View style={styles.profilePictureContainer}>
-          <Pressable onPress={uploadImage}>
-            <Image source={profilePicture} style={styles.profilePicture} />
-          </Pressable>
-        </View>
+        <ProfileImage
+          setImageUrl={setImageUrl}
+          profilePicture={profilePicture}
+        />
 
         <InputBox
           title="닉네임"
@@ -140,14 +115,5 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-  },
-  profilePictureContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  profilePicture: {
-    borderRadius: 50,
-    width: 100,
-    height: 100,
   },
 });
