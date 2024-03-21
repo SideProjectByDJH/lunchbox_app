@@ -4,29 +4,18 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
-  Text,
-  Pressable,
-  Image,
   TouchableOpacity,
-  TextInput,
 } from "react-native";
-import { theme } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
-
-const PASSWORD_INDEX = [
-  "current password",
-  "new password",
-  "new password check",
-];
+import SubmitButton from "../components/common/SubmitButton";
+import InputBox from "../components/common/InputBox";
+import Title from "../components/common/Title";
+import ProfileImage from "../components/common/ProfileImage";
 
 export default function ProfileUpdate() {
   const [imageUrl, setImageUrl] = useState(null);
-  const [libraryPermission, requestLibraryPermission] =
-    ImagePicker.useMediaLibraryPermissions();
-  const profilePicture =
-    imageUrl === null ? require("../assets/favicon.png") : { uri: imageUrl };
+  const profilePicture = imageUrl === null ? require("../assets/favicon.png") : { uri: imageUrl };
 
   const [nickname, setNickname] = useState("기존 닉네임");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -34,39 +23,7 @@ export default function ProfileUpdate() {
   const [newPassword, setNewPassword] = useState("");
   const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState("");
-  const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] =
-    useState(false);
-
-  const toggleShowPassword = (index) => {
-    if (index === PASSWORD_INDEX[0]) {
-      setCurrentPasswordVisible(!isCurrentPasswordVisible);
-    } else if (index === PASSWORD_INDEX[1]) {
-      setNewPasswordVisible(!isNewPasswordVisible);
-    } else if (index === PASSWORD_INDEX[2]) {
-      setCheckNewPasswordVisible(!isCheckNewPasswordVisible);
-    }
-  };
-
-  const uploadImage = async () => {
-    if (!libraryPermission?.granted) {
-      const permission = await requestLibraryPermission();
-      if (!permission.granted) {
-        return null;
-      }
-    }
-
-    // upload image
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-      aspect: [1, 1],
-    });
-
-    if (!result.canceled) {
-      setImageUrl(result.assets[0].uri);
-    }
-  };
+  const [isCheckNewPasswordVisible, setCheckNewPasswordVisible] = useState(false);
 
   return (
     <KeyboardAvoidingView
@@ -91,83 +48,58 @@ export default function ProfileUpdate() {
       </View>
 
       <View style={styles.mainContainer}>
-        <Text style={styles.sectionText}>개인 정보 변경</Text>
+        <Title title="개인 정보 변경" />
 
-        <View style={styles.profilePictureContainer}>
-          <Pressable onPress={uploadImage}>
-            <Image source={profilePicture} style={styles.profilePicture} />
-          </Pressable>
-        </View>
+        <ProfileImage
+          setImageUrl={setImageUrl}
+          profilePicture={profilePicture}
+        />
 
-        <Text>닉네임</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="기존 닉네임"
-            value={nickname}
-            onChangeText={setNickname}
-          />
-        </View>
-
-        <Text>현재 비밀번호</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="현재 비밀번호를 입력하세요."
-            value={currentPassword}
-            onChangeText={setCurrentPassword}
-            secureTextEntry={!isCurrentPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isCurrentPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[0])}
-          />
-        </View>
-
-        <Text>새 비밀번호</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="변경할 비밀번호를 입력하세요."
-            value={newPassword}
-            onChangeText={setNewPassword}
-            secureTextEntry={!isNewPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isNewPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[1])}
-          />
-        </View>
-
-        <Text>새 비밀번호 확인</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="변경할 비밀번호를 다시 입력하세요."
-            value={checkNewPassword}
-            onChangeText={setCheckNewPassword}
-            secureTextEntry={!isCheckNewPasswordVisible}
-          />
-          <MaterialCommunityIcons
-            name={isCheckNewPasswordVisible ? "eye-off" : "eye"}
-            style={styles.showPasswordIcon}
-            onPress={() => toggleShowPassword(PASSWORD_INDEX[2])}
-          />
-        </View>
+        <InputBox
+          title="닉네임"
+          placeholder="기존 닉네임"
+          value={nickname}
+          onChangeText={setNickname}
+          isPassword={false}
+        />
+        <InputBox
+          title="현재 비밀번호"
+          placeholder="현재 비밀번호를 입력하세요."
+          value={currentPassword}
+          onChangeText={setCurrentPassword}
+          secureTextEntry={!isCurrentPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isCurrentPasswordVisible}
+          setPasswordVisible={setCurrentPasswordVisible}
+        />
+        <InputBox
+          title="새 비밀번호"
+          placeholder="변경할 비밀번호를 입력하세요."
+          value={newPassword}
+          onChangeText={setNewPassword}
+          secureTextEntry={!isNewPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isNewPasswordVisible}
+          setPasswordVisible={setNewPasswordVisible}
+        />
+        <InputBox
+          title="새 비밀번호 확인"
+          placeholder="변경할 비밀번호를 다시 입력하세요."
+          value={checkNewPassword}
+          onChangeText={setCheckNewPassword}
+          secureTextEntry={!isCheckNewPasswordVisible}
+          isPassword={true}
+          isPasswordVisible={isCheckNewPasswordVisible}
+          setPasswordVisible={setCheckNewPasswordVisible}
+        />
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => {
-            alert(`nickname: ${nickname}, password: ${newPassword} 변경 시도.`);
-          }}
-        >
-          <Text style={styles.btnText}>변경</Text>
-        </TouchableOpacity>
-      </View>
+      <SubmitButton
+        buttonText="변경"
+        onPress={() => {
+          alert(`nickname: ${nickname}, password: ${newPassword} 변경 시도.`);
+        }}
+      />
     </KeyboardAvoidingView>
   );
 }
@@ -183,51 +115,5 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-  },
-  sectionText: {
-    color: theme.main,
-    fontSize: 44,
-    marginVertical: 20,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderColor: theme.main,
-    borderWidth: 2,
-    marginVertical: 10,
-    padding: 5,
-  },
-  textInput: {
-    padding: 10,
-    flex: 1,
-  },
-  profilePictureContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  profilePicture: {
-    borderRadius: 50,
-    width: 100,
-    height: 100,
-  },
-  showPasswordIcon: {
-    paddingHorizontal: 10,
-    color: "#aaa",
-    fontSize: 24,
-  },
-  buttonContainer: {
-    marginVertical: 35,
-  },
-  submitButton: {
-    backgroundColor: theme.main,
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: theme.white,
   },
 });
