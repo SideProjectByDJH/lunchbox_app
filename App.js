@@ -1,16 +1,19 @@
-import React from 'react';
-import { PaperProvider } from "react-native-paper";
-import { AppRegistry } from "react-native";
-import { name as appName } from './app.json';
-import NavBar from "./components/NavBar";
+import Login from "./pages/Login";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Splash from "./pages/Splash";
+import Main from "./pages/Main";
 
-export default function Main() {
 
-  return (
-    <PaperProvider>
-      <NavBar/>
-    </PaperProvider>
+const Stack = createNativeStackNavigator();
+export default function App() {
+
+  return (<NavigationContainer>
+      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Main" component={Main} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-AppRegistry.registerComponent(appName, () => Main);
