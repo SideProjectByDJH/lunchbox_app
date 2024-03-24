@@ -1,16 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { theme } from "../colors";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { theme } from '../colors';
+import MainImg from '../resource/img/splash_lunchbox.jpg';
 
-import { Image } from "react-native";
-import MainImg from "../resource/img/splash_lunchbox.jpg";
+import React from 'react';
 
-export default function Splash({ navigation }) {
+export default function Splash({navigation}) {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.ImgContainer}>
         <Image
           source={MainImg}
-          resizeMode={"stretch"}
+          resizeMode={'stretch'}
           style={styles.ImageStyle}
         />
       </View>
@@ -20,7 +20,7 @@ export default function Splash({ navigation }) {
           <TouchableOpacity
             style={styles.submitButton}
             onPress={() => {
-              navigation.navigate("Login");
+              navigation.navigate('Login');
             }}
           >
             <Text style={styles.btnText}>로그인</Text>
@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.main,
     padding: 20,
     borderRadius: 10,
-    alignItems: "center",
+    alignItems: 'center',
     margin: 10,
   },
   btnText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     color: theme.white,
   },
   buttonContainer: {
@@ -62,14 +62,14 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
 
   ImageStyle: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   ImgContainer: {
     flex: 5.5,

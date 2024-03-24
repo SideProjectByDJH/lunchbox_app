@@ -1,6 +1,6 @@
-import React from "react";
-import { FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { theme } from "../colors.js";
+import React from 'react';
+import { FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { theme } from '../colors.js';
 import DefaultImage from '../assets/default_profile.png';
 
 const DEFAULT_PROFILE_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -36,29 +36,26 @@ const Item = ({nickname, avatar}) => {
       </View>
 
     </View>
-  )
-}
+  );
+};
 
 export default function Followings() {
 
   const renderItem = ({item}) => {
     return (
       <Item nickname={item.nickname} avatar={item.avatar}/>
-    )
-  }
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTxt}>팔로워 리스트</Text>
-      </View>
       <FlatList
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

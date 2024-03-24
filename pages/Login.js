@@ -1,21 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { theme } from "../colors";
-import { useState } from "react";
+import { StatusBar } from 'expo-status-bar';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { theme } from '../colors';
+import React, { useState } from 'react';
 
-export default function Login({ navigation }) {
-  const [email, setEmail] = useState("");
+export default function Login({navigation}) {
+  const [email, setEmail] = useState('');
   // State variable to hold the password
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   // State variable to track password visibility
   const [showPassword, setShowPassword] = useState(false);
@@ -28,11 +20,11 @@ export default function Login({ navigation }) {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StatusBar style="auto" />
+      <StatusBar style="auto"/>
       <View style={styles.navigation}>
-        <View style={{ alignItems: "flex-start" }}>
+        <View style={{alignItems: 'flex-start'}}>
           <TouchableOpacity
             onPress={() => {
               navigation.goBack();
@@ -51,9 +43,9 @@ export default function Login({ navigation }) {
         <Text style={styles.guidanceText}>이메일</Text>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder={"이메일을 입력해주세요"}
+            placeholder={'이메일을 입력해주세요'}
             style={styles.textInput}
-            keyboardType={"email-address"}
+            keyboardType={'email-address'}
             value={email}
             onChangeText={setEmail}
           />
@@ -61,14 +53,14 @@ export default function Login({ navigation }) {
         <Text style={styles.guidanceText}>비밀번호</Text>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder={"비밀번호를 입력해주세요"}
+            placeholder={'비밀번호를 입력해주세요'}
             style={styles.textInput}
             secureTextEntry={!showPassword}
-            keyboardType={"default"}
+            keyboardType={'default'}
             onChangeText={setPassword}
           />
           <MaterialCommunityIcons
-            name={showPassword ? "eye-off" : "eye"}
+            name={showPassword ? 'eye-off' : 'eye'}
             size={24}
             color="#aaa"
             style={styles.icon}
@@ -78,7 +70,7 @@ export default function Login({ navigation }) {
         <View style={styles.passwordMissingTouchable}>
           <TouchableOpacity
             onPress={() => {
-              alert("비밀번호를 잊어버렸어요");
+              alert('비밀번호를 잊어버렸어요');
             }}
           >
             <Text style={styles.passwordMissingText}>
@@ -92,7 +84,7 @@ export default function Login({ navigation }) {
           style={styles.submitButton}
           onPress={() => {
             //alert(`email: ${email}, password: ${password} 로그인 시도.`)
-            navigation.navigate("Main");
+            navigation.navigate('Main');
           }}
         >
           <Text style={styles.btnText}>로그인</Text>
@@ -108,14 +100,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   navigation: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginTop: 60,
   },
   submitButton: {
     backgroundColor: theme.main,
     padding: 20,
     borderRadius: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   sectionText: {
     color: theme.main,
@@ -124,7 +116,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     color: theme.white,
   },
   guidanceText: {
@@ -137,14 +129,14 @@ const styles = StyleSheet.create({
   },
   passwordMissingText: {
     color: theme.grey,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 20,
     fontSize: 12,
   },
   inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     borderColor: theme.main,
     borderWidth: 2,
     marginVertical: 10,
@@ -160,6 +152,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   passwordMissingTouchable: {
-    alignItems: "center",
+    alignItems: 'center',
   },
 });
