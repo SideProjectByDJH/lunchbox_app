@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
 import Followings from './Followings';
+import Home from "./Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ export default function Main({navigation}) {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={{
           title: '홈',
           tabBarIcon: ({color, size}) => (
