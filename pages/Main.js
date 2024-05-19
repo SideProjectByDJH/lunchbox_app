@@ -1,9 +1,10 @@
-import { StyleSheet, Text } from 'react-native';
-import { theme } from '../colors';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import React from 'react';
-import Followings from './Followings';
+import { Text } from "react-native";
+import { theme } from "../colors";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import Followings from "./Followings";
+import Bookmark from "./Bookmark";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +13,8 @@ function HomeScreen() {
 }
 
 function BookmarkScreen() {
-  return <Text>저장 페이지</Text>;
+  // return <Text>저장 페이지</Text>;
+  return <Bookmark />;
 }
 
 function UploadScreen() {
@@ -23,12 +25,12 @@ function ProfileScreen() {
   return <Text>마이 페이지</Text>;
 }
 
-export default function Main({navigation}) {
+export default function Main({ navigation }) {
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: "green",
         tabBarInactiveTintColor: theme.main,
       }}
     >
@@ -36,9 +38,9 @@ export default function Main({navigation}) {
         name="Home"
         component={HomeScreen}
         options={{
-          title: '홈',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="home" color={color} size={size}/>
+          title: "홈",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" color={color} size={size} />
           ),
         }}
       />
@@ -46,9 +48,9 @@ export default function Main({navigation}) {
         name="Save"
         component={BookmarkScreen}
         options={{
-          title: '저장',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="bookmark" color={color} size={size}/>
+          title: "저장",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="bookmark" color={color} size={size} />
           ),
         }}
       />
@@ -56,9 +58,9 @@ export default function Main({navigation}) {
         name="Upload"
         component={UploadScreen}
         options={{
-          title: '업로드',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="upload" color={color} size={size}/>
+          title: "업로드",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="upload" color={color} size={size} />
           ),
         }}
       />
@@ -66,9 +68,9 @@ export default function Main({navigation}) {
         name="Heart"
         component={Followings}
         options={{
-          title: '팔로잉',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="heart" color={color} size={size}/>
+          title: "팔로잉",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="heart" color={color} size={size} />
           ),
         }}
       />
@@ -76,9 +78,9 @@ export default function Main({navigation}) {
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: 'MY',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="account" color={color} size={size}/>
+          title: "MY",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="account" color={color} size={size} />
           ),
         }}
       />
