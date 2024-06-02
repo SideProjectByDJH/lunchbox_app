@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableO
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { theme } from '../colors';
 import React, { useState } from 'react';
+import { login } from '../api/auth';
 
 export default function Login({navigation}) {
   const [email, setEmail] = useState('');
@@ -15,6 +16,17 @@ export default function Login({navigation}) {
   // Function to toggle the password visibility state
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleLogin = async () => {
+    try {
+      const data = await login(email, password);
+      // TODO::AuthContext같은 거 만들어서 유저 정보 저장 필요
+      alert(`로그인 성공: ${data.nickname}. 홈화면으로 이동합니다.`);
+      navigation.navigate('Main');
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -82,10 +94,7 @@ export default function Login({navigation}) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => {
-            //alert(`email: ${email}, password: ${password} 로그인 시도.`)
-            navigation.navigate('Main');
-          }}
+          onPress={handleLogin}
         >
           <Text style={styles.btnText}>로그인</Text>
         </TouchableOpacity>
